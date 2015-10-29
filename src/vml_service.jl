@@ -12,8 +12,8 @@ const VML_EP = VMLAccuracy(0x00000003)
 Base.show(io::IO, m::VMLAccuracy) = print(io, m == VML_LA ? "VML_LA" :
                                               m == VML_HA ? "VML_HA" : "VML_EP")
 
-vml_get_mode() = ccall((:_vmlGetMode, libmkl), Cuint, ())
-vml_set_mode(mode::Integer) = (ccall((:_vmlSetMode, libmkl), Cuint, (UInt,), mode); nothing)
+vml_get_mode() = ccall((:_vmlGetMode, libvml), Cuint, ())
+vml_set_mode(mode::Integer) = (ccall((:_vmlSetMode, libvml), Cuint, (UInt,), mode); nothing)
 
 vml_set_accuracy(m::VMLAccuracy) = vml_set_mode((vml_get_mode() & ~0x03) | m.mode)
 vml_get_accuracy() = VMLAccuracy(vml_get_mode() & 0x3)
@@ -21,7 +21,7 @@ vml_get_accuracy() = VMLAccuracy(vml_get_mode() & 0x3)
 vml_set_mode((vml_get_mode() & ~0x0000FF00))
 
 function vml_check_error()
-    vml_error = ccall((:_vmlClearErrStatus, libmkl), Cint, ())
+    vml_error = ccall((:_vmlClearErrStatus, libvml), Cint, ())
     if vml_error != 0
         if vml_error == 1
             error(DomainError())
