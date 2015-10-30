@@ -1,10 +1,11 @@
 using Formatting
 using Gadfly
+using MKL
+using Base.LinAlg.BLAS
 
 alpha = 0.01
 timing = 0.001
 disp_detail = false
-
 
 # ------------------------------------------------------------------------------
 #                              INDIVIDUAL BENCH
@@ -96,8 +97,9 @@ function ibench(f,arg,timing=0.0001)
 
     # TRIGGER JIT : first compilation will be ignored
     # println(f(arg))
-    res = @timed f(arg...)
-    nrun = convert(Int64,div(timing,res[2]))
+    # res = @timed f(arg...)
+    res = @timed eval(Expr(:call,f,eval(arg)...)) # everything is pass as symbol
+    nrun = max(2,convert(Int64,div(timing,res[2]))) # at least one run
 
     # allocate results arrays
     res_cpu = Array(Float64,nrun+1)
@@ -112,7 +114,7 @@ function ibench(f,arg,timing=0.0001)
     # Write PROFILING results : call f n times
     gc(), gc_enable(false)
     for i=1:nrun
-      res = @timed f(arg...)
+      res = @timed eval(Expr(:call,f,eval(arg)...))
       res_cpu[i+1] = res[2]
       res_gc[i+1] = res[4]
       res_alloc[i+1] = res[3]
@@ -148,71 +150,65 @@ function bench(fs,args,timing=0.0001)
 end
 
 
-function bplot(compare_tb)
-    nfs = size(compare_tb,1)
+function bplot{T<:Number}(labels::Vector{Any}, values_mean::Vector{T}, values_conf::Vector{T})
 
-    ys = compare_tb[:,1]
-    ymins = ys - compare_tb[:,5]
-    ymaxs = ys + compare_tb[:,5]
-    println(ys)
-    println(compare_tb[:,5])
-    println(ymins)
-    println(ymaxs)
+    nfs = size(labels)
+
+    ys = values_mean
+    ymins = ys - values_conf
+    ymaxs = ys + values_conf
+
     p = plot(
-            layer(  x=1:nfs, y=ys, ymin=ymins, ymax=ymaxs, Geom.errorbar, Theme(default_color=colorant"red")),
-            layer(  y=ys, Geom.bar,Theme(bar_spacing=1cm)),
-            Scale.x_continuous(minvalue=0, maxvalue=4),
-            Scale.y_continuous(minvalue=0, maxvalue=0.02)
-            )
+        layer(x=[string(l) for l in labels], y=ys, ymin=ymins, ymax=ymaxs, Geom.errorbar, Theme(default_color=colorant"red")),
+        layer(x=[string(l) for l in labels], y=ys, Geom.bar, Theme(bar_spacing=0.5cm)),
+        Scale.y_continuous(minvalue=0),
+        Guide.xticks(orientation=:vertical)
+    )
     return p
 end
 
 
-# rand(10)@
-# sin(randn(3))
-# .+([1,2],[2,3])
-# args = [1,2],[2,3]
-# .+(args...)
-#
-# a,b,c = ibench(.+,([1,2],[-1,2]),0.0001)
-# res_cpu
-# a
-# iplot(sin, alpha, res_cpu, res_gc, res_alloc)
-# sqrt([1,2,3])
-
-
-# begin
-#     fns = Any[]
-#     args = Any[]
-#
-#     for (fname, arg) in ((sin,  (Float32[0.0,pi/2],)),
-#                          (cos,  (Float32[0.0,pi/2],)),
-#                          (sqrt, (Float32[0.0,2],)),
-#                          )
-#         push!(fns,fname)
-#         push!(args,arg)
-#     end
-# end
 
 begin
-    fns = Any[]
+    fnames = Any[]
+    fs = Any[]
     args = Any[]
-    ne = 1000*1000
-    for (fname, arg) in ((sin,  (rand(ne),)),
-                         (cos,  (rand(ne),)),
-                         (sqrt, (rand(ne),)),
-                         )
-        push!(fns,fname)
+    n = 10000
+    a = rand(n)
+    b = rand(n)
+    y = zeros(n)
+    for (fname, f, arg) in ( ("sin",    :sin,    :(a,)      ),
+                             ("cos",    :cos,    :(a,)      ),
+                             ("sqrt",   :sqrt,   :(a,)      ),
+                             ("Add",    :(.+),   :(a,b)     ),
+                             ("Sub",    :(.-),   :(a,b)     ),
+                             ("Mul",    :(.*),   :(a,b)     ),
+                             ("Div",    :(./),   :(a,b)     ),
+                             ("Mul2",   :(MKL.mkl_mul!),    :(n,a,b,y)   ),
+                             ("BAdd",   :(BLAS.axpy!),      :(2,a,b)      ),
+                             ("MAdd",   :(MKL.mkl_add!),    :(n,a,b,y)   ),
+                             )
+        push!(fnames,fname)
+        push!(fs,f)
         push!(args,arg)
     end
+
+    compare_cpu, compare_gc, compare_alloc = bench(fs,args,1)
+    bplot(fnames,compare_cpu[:,1],compare_cpu[:,5])
 end
-
-fns
-args
-compare_cpu, compare_gc, compare_alloc = bench(fns,args,1)
-bplot(compare_cpu)
+#
+# fs
+# args
 
 
 
 
-# bench(Any[sin, sqrt],Any[(rand(10),),(rand(10),)],0.0001)
+# EXPRESION HELP
+#
+# f = :(MKL.mkl_mul!)
+# arg = :(2,Float64[1,2],Float64[1,2],zeros(2))
+# res = @time eval(Expr(:call,f,eval(arg)...))
+# ibench(f,arg,0.00000001)
+#
+# r = Expr(:call,:(MKL.mkl_mul!),:(2,Float64[1,2],Float64[1,2],zeros(2)))
+# eval(r)
