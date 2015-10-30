@@ -8,11 +8,16 @@ julia:
 notifications:
   email: false
 sudo: false
+addons:
+    apt_packages:
+        - gfortran
+        - liblapack-dev
+        - libgmp-dev
+        - libglpk-dev
 script:
+    - if [[ -a .git/shallow ]]; then git fetch --unshallow; fi
     - julia -e 'Pkg.clone(pwd())'
-    - julia -e 'Pkg.build("MKL")'
-    - if [ -f test/runtests.jl ]; then
-    - julia --check-bounds=yes -e 'Pkg.test("MKL", coverage=true)'
-    - fi
+    - julia -e 'Pkg.test("Convex", coverage=true)'
 after_success:
-    - julia -e 'cd(Pkg.dir("MKL")); Pkg.add("Coverage"); using Coverage; Codecov.submit(process_folder())'
+    - julia -e 'Pkg.add("Coverage")'
+    - julia -e 'cd(Pkg.dir("Convex")); using Coverage; Coveralls.submit(process_folder())'
