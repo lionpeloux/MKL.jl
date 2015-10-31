@@ -2,6 +2,8 @@ using Formatting
 using Gadfly
 using MKL
 using Base.LinAlg.BLAS
+using DataFrames
+
 
 alpha = 0.01
 timing = 0.001
@@ -85,7 +87,7 @@ function iplot(f, alpha, res_cpu::Vector{Float64}, res_gc::Vector{Float64}, res_
     ymaxs = ys .+ stat_cpu[5]
 
     p = plot(
-            layer(  x=1:1, y=ys, ymin=ymins, ymax=ymaxs, Geom.errorbar, Theme(default_color=colorant"red")),
+            layer(  x=1:1, y=ys, ymin=ymins, ymax=ymaxs, Geom.errorbar, Theme(default_color="red")),
             layer(  y=ys, Geom.bar,Theme(bar_spacing=1cm)),
             Scale.x_continuous(minvalue=0, maxvalue=4),
             Scale.y_continuous(minvalue=0, maxvalue=stat_cpu[1]+2*stat_cpu[4])
@@ -159,7 +161,7 @@ function bplot{T<:Number}(labels::Vector{Any}, values_mean::Vector{T}, values_co
     ymaxs = ys + values_conf
 
     p = plot(
-        layer(x=[string(l) for l in labels], y=ys, ymin=ymins, ymax=ymaxs, Geom.errorbar, Theme(default_color=colorant"red")),
+        layer(x=[string(l) for l in labels], y=ys, ymin=ymins, ymax=ymaxs, Geom.errorbar, Theme(default_color="red")),
         layer(x=[string(l) for l in labels], y=ys, Geom.bar, Theme(bar_spacing=0.5cm)),
         Scale.y_continuous(minvalue=0),
         Guide.xticks(orientation=:vertical)
@@ -169,39 +171,145 @@ end
 
 
 
-begin
-    fnames = Any[]
-    fs = Any[]
-    args = Any[]
-    n = 10000
-    a = rand(n)
-    b = rand(n)
-    y = zeros(n)
-    for (fname, f, arg) in ( ("sin",    :sin,    :(a,)      ),
-                             ("cos",    :cos,    :(a,)      ),
-                             ("sqrt",   :sqrt,   :(a,)      ),
-                             ("Add",    :(.+),   :(a,b)     ),
-                             ("Sub",    :(.-),   :(a,b)     ),
-                             ("Mul",    :(.*),   :(a,b)     ),
-                             ("Div",    :(./),   :(a,b)     ),
-                             ("Mul2",   :(MKL.mkl_mul!),    :(n,a,b,y)   ),
-                             ("BAdd",   :(BLAS.axpy!),      :(2,a,b)      ),
-                             ("MAdd",   :(MKL.mkl_add!),    :(n,a,b,y)   ),
-                             )
-        push!(fnames,fname)
-        push!(fs,f)
-        push!(args,arg)
-    end
 
-    compare_cpu, compare_gc, compare_alloc = bench(fs,args,1)
-    bplot(fnames,compare_cpu[:,1],compare_cpu[:,5])
-end
+# begin
+#     fnames = Any[]
+#     fs = Any[]
+#     args = Any[]
+#     n = 10000
+#     a = rand(n)
+#     b = rand(n)
+#     y = zeros(n)
+#     for (fname, f, arg) in ( ("sin",    :sin,    :(a,)      ),
+#                              ("cos",    :cos,    :(a,)      ),
+#                              ("sqrt",   :sqrt,   :(a,)      ),
+#                              ("Add",    :(.+),   :(a,b)     ),
+#                              ("Sub",    :(.-),   :(a,b)     ),
+#                              ("Mul",    :(.*),   :(a,b)     ),
+#                              ("Div",    :(./),   :(a,b)     ),
+#                              ("Mul2",   :(MKL.mkl_mul!),    :(n,a,b,y)   ),
+#                              ("BAdd",   :(BLAS.axpy!),      :(2,a,b)      ),
+#                              ("MAdd",   :(MKL.mkl_add!),    :(n,a,b,y)   ),
+#                              )
+#         push!(fnames,fname)
+#         push!(fs,f)
+#         push!(args,arg)
+#     end
+#
+#     compare_cpu, compare_gc, compare_alloc = bench(fs,args,1)
+#     bplot(fnames,compare_cpu[:,1],compare_cpu[:,5])
+# end
 #
 # fs
 # args
 
+begin
+    df = DataFrame(Generic = AbstractString[], Implementation = AbstractString[], Type = AbstractString[], Method = Any[], CPU_mean = Number[], CPU_conf = Number[])
+
+    n = 1000*1000
+    a32 = rand(Float32,n)
+    b32 = rand(Float32,n)
+    y32 = zeros(Float32,n)
+    a64 = rand(Float64,n)
+    b64 = rand(Float64,n)
+    y64 = zeros(Float64,n)
+
+    for (t,a,b,y) in (("Float32",:a32,:b32,:y32),("Float64",:a64,:b64,:y64))
+
+        tup = (
+        ("Add",    "VJulia",    t,  :(+)            ,   :($a,$b)        ),
+        ("Add",    "BLAS"  ,    t,  :(BLAS.axpy!)   ,   :(1.0,$a,$y)    ),
+        ("Add",    "MKL"   ,    t,  :(MKL.mkl_add!) ,   :(n,$a,$b,$y)  ),
+
+        ("Sub",    "VJulia",    t,  :(-)            ,   :($a,$b)        ),
+        ("Sub",    "BLAS"  ,    t,  :(BLAS.axpy!)   ,   :(-1.0,$a,$y)   ),
+        ("Sub",    "MKL"   ,    t,  :(MKL.mkl_sub!) ,   :(n,$a,$b,$y)  ),
+        )
+
+        for (gm, imp, ty, f, arg) in tup
+            res_cpu, res_gc, res_alloc = ibench(f,arg,timing)
+            stat_cpu = bstat(res_cpu[2:end],alpha)
+            push!(df,[gm,imp, t, f,stat_cpu[1],stat_cpu[5]])
+        end
+    end
+end
+
+begin
+    # symbol(string(:(MKL.mkl_sub!)))
+    hrow = union(df[:Generic])
+    hcol = union(df[:Implementation])
+    resdf = DataFrame()
+    resdf[:Generic] = hcol
+    for imp in hrow
+        resdf[symbol(imp)] = [0.0 for i=1:1:length(hcol)]
+    end
+    println(resdf)
+    subdf = df[ df[:Type] .== "Float32", :]
+    println(subdf)
+
+    for i=1:nrow(subdf)
+        col = 1+findfirst(hrow,subdf[i,1])
+        row = findfirst(hcol,subdf[i,2])
+        # println(col,",",row)
+        resdf[row,col] = subdf[i,5]
+    end
+    println(resdf)
+
+    writetable("output.csv", resdf, separator='\t')
+end
 
 
+
+
+
+M = ["Imp" ; hrow]
+
+for i = 1:6
+
+
+findfirst(hrow,"Add")
+
+println(df)
+res =
+println(res)
+set_default_plot_size(10cm, 10cm)
+
+# p = plot(df, xgroup="Generic", ygroup="Type", x="Implementation", y="CPU_mean", color="Implementation", Geom.subplot_grid(Geom.bar))
+
+# writetable("output.csv", df, separator='\t')
+p = plot(df, ygroup="Type", x="Method", y="CPU_mean", color="Implementation", Geom.subplot_grid(Geom.bar, Guide.xticks(orientation=:vertical)),Theme(bar_spacing=0.1cm))
+
+
+# push!(df,[1,"sin","VJulia", Float32, :sin, ibench)
+# eval(df[1,6])
+#
+# ibench(f,arg,0.00000001)
+#
+#
+# println(df)
+#
+# "Generic Method" = sin
+# "Generic Method"
+# typeof(Float32)
+# df = DataFrame()
+# df[:CPU_mean] = [1,1,1,1]
+# df[:CPU_conf] = [0.1, 0.1, 0.2, 0.2]
+# df[:CPU_errinf] = []
+#
+#
+# df[:Label] = ["A" for i=1:10]
+# df[:Native] = rand(10)
+# df[:OpenBLAS] = 1:10
+# df[:OpenMKL] = .5*(1:10)
+# df[:Color] = [1,2,3,1,2,3,1,2,3,1]
+# df
+#
+# plot(df, x="Native", color="Color", Geom.histogram(position=:dodge),Theme(bar_spacing=0.2cm))
+#
+# plot(df, x="Native", color="Color", Geom.histogram(position=:dodge),Theme(bar_spacing=0.2cm))
+
+
+# plot(df, x="OpenBLAS", y=["Color","OpenMKL"], label="Label", Geom.bar, Geom.label(position=:below))
 
 # EXPRESION HELP
 #
