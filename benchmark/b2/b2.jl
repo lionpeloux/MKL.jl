@@ -1,7 +1,8 @@
 using MKL
 using Base.LinAlg.BLAS
-using Gadfly
+# using Gadfly
 using DataFrames
+# using Plotly
 
 include("../utility.jl")
 
@@ -10,167 +11,142 @@ In this benchmark (b1), we provide a comparison between functions from
 Julia, OpenBLAS and MKL that runs on a n-dim vector.
 The comparison is also made between Float32 / Float64.
 """
+
 # BENCH PARAMETERS
-timing = 2
+timing = .1
 α = 0.01
 path = Pkg.dir("MKL") * "/benchmark/b1/"
 
-# DEFINE VECTORIZED JULIA FONCTIONS
-vj_dot(a,b) = sum(a.*b)
-vj_axpy(λ,a,b) = λ*a+b
-vj_invsqrt{T<:Number}(a::Vector{T}) = 1 ./ sqrt(a)
 
-# DEFINE OPTIMIZED JULIA FUNCTIONS
-# TOOD : loop @inbounds to see how fast it is.
+N = [   10,20,30,40,50,100,250,500,750,1000,
+        2500,5000,7500,10000,
+        25000,50000,75000,100000,
+        # 250000,500000,750000,1000000,
+        # 2500000,5000000,7500000,10000000,
+        ]
 
-# GENERATE RAW DATA
-begin
-    df = DataFrame(Generic = ASCIIString[], Implementation = ASCIIString[], Type = ASCIIString[], Method = Any[], CPU_mean = Number[], CPU_conf = Number[])
+f_julia = sqrt
+f_mkl = mkl_sqrt!
 
-    n = 10
+# df = DataFrame(N = Int[], Julia = Float64[], MKL = Float64[], ratio = Float64[])
+t = Float64
 
-    λ32 = convert(Float32,pi) # keep it to 1.0 otherwise scal is going inf
-    a32 = rand(Float32,n)
-    b32 = rand(Float32,n)
-    y32 = zeros(Float32,n)
-    z32 = zeros(Float32,n)
+# for n in N
+#
+#     a = rand(n)
+#     y = rand(n)
+#
+#     args = (a,)
+#     res_cpu, res_gc, res_alloc = ibench(f_julia, args,timing ; α=α, print_eval=false, print_stats=true)
+#     stat_cpu_julia = bstat(res_cpu[2:end],α)
+#
+#     args = (n,a,y)
+#     res_cpu, res_gc, res_alloc = ibench(f_mkl, args,timing ; α=α, print_eval=false, print_stats=true)
+#     stat_cpu_mkl = bstat(res_cpu[2:end],α)
+#
+#     push!(df,[n,stat_cpu_julia[1],stat_cpu_mkl[5],stat_cpu_julia[1]/stat_cpu_mkl[5]])
+# end
+#
+# println(df)
+#
+#
+# plot(
+#         # layer(df, x="N", y="ratio", Geom.line),
+#         layer(df, x="N", y="Julia", Geom.line),
+#         layer(df, x="N", y="MKL", Geom.line),
+#          Scale.x_log10, Scale.y_log10)
 
-    λ64 = convert(Float64,pi) # keep it to 1.0 otherwise scal is going inf
-    a64 = rand(Float64,n)
-    b64 = rand(Float64,n)
-    y64 = zeros(Float64,n)
-    z64 = ones(Float64,n)
+a = Float64[1,2,4,6,9]
+y = rand(5)
+broadcast!(sqrt,y,a)
 
-    for (t,λ,a,b,y,z) in ((Float32,λ32,a32,b32,y32,z32),(Float64,λ64,a64,b64,y64,z64))
+df = DataFrame(N = Int[], VJulia_1 = Float64[], OJulia_1 = Float64[], MKL_1 = Float64[], VJulia_2 = Float64[], OJulia_2= Float64[], MKL_2 = Float64[])
 
-        tup = (
+# function bench(f,args,timing)
+#
+#     f(args...)
+#     t = @elapsed f(args...)
+#     nrun = round(timing/t)+2
+#     println(nrun)
+#     return mean([(@timed f(args...))[2] for i=1:nrun])
+# end
+#
+#
+# n = 1000*1000
+# a = rand(n)
+# y = rand(n)
+# ibench3(mkl_sqrt!,(n,a,y),1)*1e9/n
+#
+# mean([(@timed mkl_sqrt!(n,a,y))[2] for i=1:500])*1e9/n
+# mean([@elapsed mkl_sqrt!(n,a,y) for i=1:500])*1e9/n
 
-        ("<X|Y>",   "VJulia",    t,  vj_dot     ,   (a,b)       ),
-        ("<X|Y>",   "BLAS"  ,    t,  BLAS.dot   ,   (n,a,1,b,1) ),
-        ("<X|Y>",   "MKL"   ,    t,  mkl_dot    ,   (n,a,1,b,1) ),
 
-        ("aX",      "VJulia",    t,  *          ,   (λ,a)       ),
-        ("aX",      "BLAS"  ,    t,  BLAS.scal! ,   (n,λ,a,1)   ),
-        ("aX",      "MKL"   ,    t,  mkl_scal!  ,   (n,λ,a,1)   ),
+for n in N
 
-        ("X+Y",     "VJulia",    t,  +          ,   (a,b)       ),
-        ("X+Y",     "BLAS"  ,    t,  BLAS.axpy! ,   (1.0,a,b)   ),
-        ("X+Y",     "MKL"   ,    t,  mkl_add!   ,   (n,a,b,y)   ),
+    a = rand(n)
+    y = rand(n)
 
-        ("X-Y",     "VJulia",    t,  -          ,   (a,b)       ),
-        ("X-Y",     "BLAS"  ,    t,  BLAS.axpy! ,   (-1.0,a,b)  ),
-        ("X-Y",     "MKL"   ,    t,  mkl_sub!   ,   (n,a,b,y)   ),
+    t_vj_1 = mean([@elapsed sqrt(a) for i=1:500])* (1e9/n)
+    t_oj_1 =  mean([@elapsed broadcast!(sqrt,y,a) for i=1:500])* (1e9/n)
+    t_mkl_1 = mean([@elapsed mkl_sqrt!(n,a,y) for i=1:1000])* (1e9/n)
 
-        ("aX+Y",    "VJulia",    t,  vj_axpy    ,   (λ,a,b)     ),
-        ("aX+Y",    "BLAS"  ,    t,  BLAS.axpy! ,   (λ,a,b)     ),
-        ("aX+Y",    "MKL"   ,    t,  mkl_axpy!  ,   (n,λ,a,1,b,1)),
+    res_cpu, res_gc, res_alloc = ibench(sqrt,(a,),timing ; α=α, print_eval=false, print_stats=true)
+    stat_cpu_julia = bstat(res_cpu[2:end] * (1e9/n),α)
+    t_vj_2 = stat_cpu_julia[1]
 
-        ("X.Y",     "VJulia",    t,  .*         ,   (a,b)       ),
-        ("X.Y",     "MKL"   ,    t,  mkl_mul!   ,   (n,a,b,y)   ),
+    res_cpu, res_gc, res_alloc = ibench(broadcast!,(sqrt,y,a,),timing ; α=α, print_eval=false, print_stats=true)
+    stat_cpu_julia = bstat(res_cpu[2:end] * (1e9/n),α)
+    t_oj_2 = stat_cpu_julia[1]
 
-        ("X^2",     "VJulia",    t,  .^         ,   (a,convert(t,2))    ),
-        ("X^2",     "MKL"   ,    t,  mkl_powx!  ,   (n,a,convert(t,2),y)),
+    res_cpu, res_gc, res_alloc = ibench(mkl_sqrt!, (n,a,y),timing, false ; α=α, print_eval=false, print_stats=true)
+    stat_cpu_mkl = bstat(res_cpu[2:end] * (1e9/n),α)
+    t_mkl_2 = stat_cpu_mkl[1]
 
-        ("X/Y",     "VJulia",    t,  ./         ,   (a,b)       ),
-        ("X/Y",     "MKL"   ,    t,  mkl_div!   ,   (n,a,b,y)   ),
-
-        ("1/X",     "VJulia",    t,  ./         ,   (convert(t,1),b)),
-        ("1/X",     "MKL"   ,    t,  mkl_div!   ,   (n,a,b,y)   ),
-
-        ("|X|",     "VJulia",    t,  abs        ,   (a,)        ),
-        ("|X|",     "MKL"   ,    t,  mkl_abs!   ,   (n,a,y)     ),
-
-        ("sqrt(X)", "VJulia",    t,  sqrt       ,   (a,)        ),
-        ("sqrt(X)", "MKL"   ,    t,  mkl_sqrt!  ,   (n,a,y)     ),
-
-        ("1/sqrt(X)", "VJulia",  t,  vj_invsqrt ,   (a,)        ),
-        ("1/sqrt(X)", "MKL"   ,  t,  mkl_invsqrt!,  (n,a,y)     ),
-
-        )
-
-        for (gm, imp, ty, f, args) in tup
-            res_cpu, res_gc, res_alloc = ibench(f, args,timing ; α=α, print_eval=false, print_stats=true)
-            stat_cpu = bstat(res_cpu[2:end] * (1e9/n),α) # in micro second per op
-            push!(df,[gm,imp, string(ty), f, stat_cpu[1],stat_cpu[5]])
-        end
-    end
+    push!(df,[n,t_vj_1,t_oj_1,t_mkl_1,t_vj_2,t_oj_2,t_mkl_2])
 end
 
-# POST TREATMENT FOR .CSV EXPORT (using DatFrames)
-begin
-    hrow = union(df[:Generic]) # list of generic functions
-    hcol = ("BLAS","MKL","VJulia") #union(df[:Implementation])
-    resdf = DataFrame()
 
-    col = ASCIIString[]
-    for i=1:length(hcol)
-        push!(col,string(hcol[i]," (mean)"))
-        push!(col,string(hcol[i]," (conf)"))
-    end
-    resdf[:Generic] = col
+println(df)
 
-    for imp in hrow
-        resdf[symbol(imp)] = [0.0 for i=1:2*length(hcol)]
-    end
+#
+# plot(
+#         # layer(df, x="N", y="ratio", Geom.line),
+#         layer(df, x="N", y="VJulia_1", Geom.line),
+#         layer(df, x="N", y="OJulia_1", Geom.line),
+#         layer(df, x="N", y="MKL_1", Geom.line),
+#          Scale.x_log10, Scale.y_log10)
+#
 
-    subdf = df[ df[:Type] .== "Float32", :]
 
-    for i=1:nrow(subdf)
-        icol = 1 + findfirst(hrow,subdf[i,1])
-        irow = 1 + 2*(findfirst(hcol,subdf[i,2])-1)
-        resdf[irow,icol] = subdf[i,5]
-        resdf[irow+1,icol] = subdf[i,6]
-    end
-    # println(hcol)
-    # println(hrow)
-    println(df)
-    println(subdf)
+# trace1 = [
+#   "x" => df[:N],
+#   "y" => df[:Julia],
+#   "type" => "scatter"
+# ]
+# trace2 = [
+#   "x" => df[:N],
+#   "y" => df[:MKL],
+#   "type" => "scatter"
+# ]
+# data = [trace1, trace2]
+# layout = [
+#   "xaxis" => [
+#     "type" => "log",
+#     "autorange" => true
+#   ],
+#   "yaxis" => [
+#     # "type" => "log",
+#     "autorange" => true
+#   ]
+# ]
+# # response = Plotly.plot(data, ["layout" => layout, "filename" => "plotly-log-axes", "fileopt" => "overwrite"])
+# # plot_url = response["url"]
+# # println(plot_url)
 
-    println(resdf)
-    # writetable("output.csv", resdf, separator='\t')
-    writetable(path * "b1_cpu_$n.csv", resdf, separator='\t')
-    # writetable(path * "output.csv", df, separator='\t')
-end
 
-# Float32 / Float64 PERFORMANCE COMPARISON
-begin
-    hrow = union(df[:Generic]) # list of generic functions
-    hcol = ("BLAS","MKL","VJulia") #union(df[:Implementation])
-    resdf = DataFrame()
 
-    col = ASCIIString[]
-    for i=1:length(hcol)
-        push!(col,string(hcol[i],""))
-    end
-    resdf[:Generic] = col
 
-    for imp in hrow
-        resdf[symbol(imp)] = [0.0 for i=1:1*length(hcol)]
-    end
 
-    subdf_32 = df[ df[:Type] .== "Float32", :]
-    subdf_64 = df[ df[:Type] .== "Float64", :]
-
-    for i=1:nrow(subdf_64)
-        subdf_64[i,5] = subdf_64[i,5] / subdf_32[i,5]
-        println(subdf_64[i,5])
-    end
-
-    for i=1:nrow(subdf_64)
-        icol = 1 + findfirst(hrow,subdf_64[i,1])
-        irow = 1 + 1*(findfirst(hcol,subdf_64[i,2])-1)
-        resdf[irow,icol] = subdf_64[i,5]
-    end
-
-    # println(subdf_64)
-    # println(resdf)
-    writetable(path * "b1_Float32_vs_Float64_$n.csv", resdf, separator='\t')
-
-    # println(resdf)
-    # writetable("output.csv", resdf, separator='\t')
-
-    # writetable(path * "output.csv", df, separator='\t')
-end
 
 
 

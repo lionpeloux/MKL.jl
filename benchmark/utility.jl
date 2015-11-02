@@ -24,17 +24,14 @@ end
 `JIT` is triggered and results are stored in the return arrays at item `1`.
 `gcdisable` allows to disable the GC during evaluations (defaults to `true`).
 """
-function ibench(f, args, timing=0.0001, gcdisable=true ; α=0.05, print_eval=false, print_stats=false, print_detail=false)
-
-    # HOW-TO : construct an expression for unary and multiary functions
-    # f is a function (not a symbol)
-    # args is a tuple of arguments (a,) ; (a,b) ; (a,b,c) etc
+function ibench(f, args, timing=0.0001, gcdisable=true ; α=0.05, print_header = true, print_eval=false, print_stats=false, print_detail=false)
 
     # TRIGGER JIT : first compilation will be ignored
-    # res = @timed f(arg...)
-    # res = @timed eval(Expr(:call,f,eval(arg)...)) # everything is pass as symbol
     res = @timed f(args...)
-    nrun = max(2,convert(Int64,div(timing,res[2]))) # at least one run
+
+    # eval nrun to match timing
+    t = @elapsed f(args...)
+    nrun = max(2,convert(Int64,div(timing,t))) # at least one run
 
     # allocate results arrays
     res_cpu = Array(Float64,nrun+1)
@@ -47,7 +44,7 @@ function ibench(f, args, timing=0.0001, gcdisable=true ; α=0.05, print_eval=fal
     res_alloc[1] = res[3]
 
     # write PROFILING results : call f n times
-    gc()
+    gcdisable ? gc() : ""
     for i=1:nrun
         gcdisable ? gc_enable(false) : ""
         res = @timed f(args...)
@@ -57,8 +54,38 @@ function ibench(f, args, timing=0.0001, gcdisable=true ; α=0.05, print_eval=fal
         res_alloc[i+1] = res[3]
     end
 
-    idisplay(f, args, timing, res_cpu, res_gc, res_alloc ; α=α, print_eval=print_eval, print_stats=print_stats, print_detail=print_detail)
+    if print_header==true || print_stats==true || print_detail==true
+        idisplay(f, args, timing, res_cpu, res_gc, res_alloc ; α=α, print_eval=print_eval, print_stats=print_stats, print_detail=print_detail)
+    end
     return res_cpu, res_gc, res_alloc
+end
+
+function ibench3(f, args, timing=0.0001)
+
+    # TRIGGER JIT : first compilation will be ignored
+    res = @timed f(args...)
+
+    # Nrun
+    t = @elapsed f(args...)
+    nrun = convert(Int,round(timing/t)+2)
+
+    # allocate results arrays
+    res_cpu     = Array(Float64,nrun+1)
+    res_gc      = Array(Float64,nrun+1)
+    res_alloc   = Array(Int64,nrun+1)
+
+    # write JIT results
+    res_cpu[1] = res[2]
+    res_gc[1] = res[4]
+    res_alloc[1] = res[3]
+
+    res_cpu = Array{Float64}(nrun)
+    for i=1:nrun
+        res = @timed f(args...)
+        res_cpu[i] = res[2]
+    end
+    # res_cpu = [(@timed f(args...))[2] for i=1:nrun]
+    return mean(res_cpu)
 end
 
 """
