@@ -1,6 +1,8 @@
-# MKL.jl
+# Benchmark B1
 
-[![Build Status](https://travis-ci.org/lionpeloux/MKL.jl.svg?branch=master)](https://travis-ci.org/lionpeloux/MKL.jl)
+This benchmark compare the absolute or relative CPU performances of several basic arithmetic functions on `n-dim`vectors :
+- compare CPU time for different values of `n` (from 1e1 to 1e6) and different packages (BLAS, MKL, Native Julia)
+- compare relative performance usage regarding the precision (Float32 vs. Float64)
 
 
-Julia wrapper to Intel MKL library, using the Single Dynamic Library (mkl_rt)
+
