@@ -2,32 +2,28 @@
 #                           BLAS LEVEL 1
 # ------------------------------------------------------------------------------
 
-println("MKL : BLAS LEVEL 1")
-for name in (   :asum,
-                :axpy!,
-                :copy!,
-                :dot,
-                :sdot,
-                :nrm2,
-                :scal!)
+if debug println("MKL : BLAS LEVEL 1") end
+for fname in (  :mkl_asum,
+                :mkl_axpy!,
+                :mkl_copy!,
+                :mkl_dot,
+                :mkl_sdot,
+                :mkl_nrm2,
+                :mkl_scal!)
 
-                fname = symbol(string(prefix)*string(name))
-                println("export : ", fname)
-                @eval begin
-                    export $fname
-                end
+                if debug println("export : ", fname) end
+                @eval export $fname
 end
 
 # ------------------------------------------------------------------------------
 
 
 ## ?asum
-name = :asum
+fname = :mkl_asum
 for (fmkl, elty, ret_type) in ((:dasum,:Float64,:Float64),
                                 (:sasum,:Float32,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, X::Union{Ptr{$elty},DenseArray{$elty}}, incx::Integer)
             ccall(($(string(fmkl)), libmkl), $ret_type,
                 (Ptr{Int}, Ptr{$elty}, Ptr{Int}),
@@ -39,12 +35,11 @@ end
 
 
 ## ?axpy!
-name = :axpy!
+fname = :mkl_axpy!
 for (fmkl, elty) in ((:daxpy,:Float64),
                       (:saxpy,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, alpha::($elty), dx::Union{Ptr{$elty}, DenseArray{$elty}}, incx::Integer, dy::Union{Ptr{$elty}, DenseArray{$elty}}, incy::Integer)
             ccall(($(string(fmkl)), libmkl), Void,
                 (Ptr{Int}, Ptr{$elty}, Ptr{$elty}, Ptr{Int}, Ptr{$elty}, Ptr{Int}),
@@ -57,12 +52,11 @@ end
 
 
 ## ?copy!
-name = :copy!
+fname = :mkl_copy!
 for (fmkl, elty) in ((:dcopy,:Float64),
                       (:scopy,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, dx::Union{Ptr{$elty},StridedArray{$elty}}, incx::Integer, dy::Union{Ptr{$elty},StridedArray{$elty}}, incy::Integer)
             ccall(($(string(fmkl)), libmkl), Void,
                 (Ptr{Int}, Ptr{$elty}, Ptr{Int}, Ptr{$elty}, Ptr{Int}),
@@ -75,12 +69,11 @@ end
 
 
 ## ?dot
-name = :dot
+fname = :mkl_dot
 for (fmkl, elty) in ((:ddot,:Float64),
                       (:sdot,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, dx::Union{Ptr{$elty},DenseArray{$elty}}, incx::Integer, dy::Union{Ptr{$elty},DenseArray{$elty}}, incy::Integer)
             ccall(($(string(fmkl)), libmkl), $elty,
                 (Ptr{Int}, Ptr{$elty}, Ptr{Int}, Ptr{$elty}, Ptr{Int}),
@@ -92,11 +85,10 @@ end
 
 
 ## ?sdot
-name = :sdot
+fname = :mkl_sdot
 for (fmkl, elty) in ((:dsdot,:Float32),)
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, dx::Union{Ptr{$elty},DenseArray{$elty}}, incx::Integer, dy::Union{Ptr{$elty},DenseArray{$elty}}, incy::Integer)
             ccall(($(string(fmkl)), libmkl), Float64,
                 (Ptr{Int}, Ptr{$elty}, Ptr{Int}, Ptr{$elty}, Ptr{Int}),
@@ -108,12 +100,11 @@ end
 
 
 ## nrm2
-name = :nrm2
+fname = :mkl_nrm2
 for (fmkl, elty, ret_type) in ((:dnrm2_,:Float64,:Float64),
                                 (:snrm2_,:Float32,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, X::Union{Ptr{$elty},DenseArray{$elty}}, incx::Integer)
             ccall(($(string(fmkl)), libmkl), $ret_type,
                 (Ptr{Int}, Ptr{$elty}, Ptr{Int}),
@@ -125,12 +116,11 @@ end
 
 
 ## scal!
-name = :scal!
+fname = :mkl_scal!
 for (fmkl, elty) in ((:dscal,:Float64),
                       (:sscal,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
-    @eval begin
+        @eval begin
         function $fname(n::Integer, alpha::$elty, DX::Union{Ptr{$elty},DenseArray{$elty}}, incx::Integer)
             ccall(($(string(fmkl)), libmkl), Void,
                   (Ptr{Int}, Ptr{$elty}, Ptr{$elty}, Ptr{Int}),

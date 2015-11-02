@@ -2,33 +2,29 @@
 #                        VML POWER AND ROOT FUNCTIONS
 # ------------------------------------------------------------------------------
 
-println("MKL : VML POWER AND ROOT")
-for name in (   :inv!,
-                :div!,
-                :sqrt!,
-                :invsqrt!,
-                :cbrt!,
-                :invcbrt!,
-                :pow!,
-                :powx!,
-                :hypot!)
+if debug println("MKL : VML POWER AND ROOT") end
+for fname in (  :mkl_inv!,
+                :mkl_div!,
+                :mkl_sqrt!,
+                :mkl_invsqrt!,
+                :mkl_cbrt!,
+                :mkl_invcbrt!,
+                :mkl_pow!,
+                :mkl_powx!,
+                :mkl_hypot!)
 
-                fname = symbol(string(prefix)*string(name))
-                println("export : ", fname)
-                @eval begin
-                    export $fname
-                end
+                if debug println("export : ", fname) end
+                @eval export $fname
 end
 
 # ------------------------------------------------------------------------------
 
 
 ## ?Inv
-name = :inv!
+fname = :mkl_inv!
 for (fmkl, elty) in ((:vdInv,:Float64),
                       (:vsInv,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -43,11 +39,10 @@ end
 
 
 ## ?Div
-name = :div!
+fname = :mkl_div!
 for (fmkl, elty) in ((:vdDiv,:Float64),
                       (:vsDiv,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -62,11 +57,10 @@ end
 
 
 ## ?Sqrt
-name = :sqrt!
+fname = :mkl_sqrt!
 for (fmkl, elty) in ((:vdSqrt,:Float64),
                       (:vsSqrt,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -81,11 +75,10 @@ end
 
 
 ## ?InvSqrt
-name = :invsqrt!
+fname = :mkl_invsqrt!
 for (fmkl, elty) in ((:vdInvSqrt,:Float64),
                       (:vsInvSqrt,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -100,11 +93,10 @@ end
 
 
 ## ?Cbrt
-name = :cbrt!
+fname = :mkl_cbrt!
 for (fmkl, elty) in ((:vdCbrt,:Float64),
                       (:vsCbrt,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -119,11 +111,10 @@ end
 
 
 ## ?InvCbrt
-name = :invcbrt!
+fname = :mkl_invcbrt!
 for (fmkl, elty) in ((:vdInvCbrt,:Float64),
                       (:vsInvCbrt,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -138,11 +129,10 @@ end
 
 
 ## ?Pow
-name = :pow!
+fname = :mkl_pow!
 for (fmkl, elty) in ((:vdPow,:Float64),
                       (:vsPow,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -157,11 +147,10 @@ end
 
 
 ## ?Powx
-name = :powx!
+fname = :mkl_powx!
 for (fmkl, elty) in ((:vdPowx,:Float64),
                       (:vsPowx,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::$elty, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
@@ -176,11 +165,10 @@ end
 
 
 ## ?Hypot
-name = :hypot!
+fname = :mkl_hypot!
 for (fmkl, elty) in ((:vdHypot,:Float64),
                       (:vsHypot,:Float32))
 
-    fname = symbol(string(prefix)*string(name))
     @eval begin
         function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
             ccall(($(string(fmkl)), libmkl), Void,
