@@ -2,12 +2,36 @@
 #                        VML POWER AND ROOT FUNCTIONS
 # ------------------------------------------------------------------------------
 
+println("MKL : VML POWER AND ROOT")
+for name in (   :inv!,
+                :div!,
+                :sqrt!,
+                :invsqrt!,
+                :cbrt!,
+                :invcbrt!,
+                :pow!,
+                :powx!,
+                :hypot!)
+
+                fname = symbol(string(prefix)*string(name))
+                println("export : ", fname)
+                @eval begin
+                    export $fname
+                end
+end
+
+# ------------------------------------------------------------------------------
+
+
 ## ?Inv
-for (fname, elty) in ((:vdInv,:Float64),
+name = :inv!
+for (fmkl, elty) in ((:vdInv,:Float64),
                       (:vsInv,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_inv!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}),
                  n, a, y)
             # vml_check_error()
@@ -15,18 +39,18 @@ for (fname, elty) in ((:vdInv,:Float64),
         end
     end
 end
-begin
-    T = Float64
-    a = T[1,0,2,2]
-    mkl_inv!(4,a,a)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?Div
-for (fname, elty) in ((:vdDiv,:Float64),
+name = :div!
+for (fmkl, elty) in ((:vdDiv,:Float64),
                       (:vsDiv,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_div!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}, Ptr{$elty}),
                  n, a, b, y)
             # vml_check_error()
@@ -34,19 +58,18 @@ for (fname, elty) in ((:vdDiv,:Float64),
         end
     end
 end
-begin
-    T = Float32
-    a = T[1,0,2,2]
-    b = T[0.5,2,2,-4]
-    mkl_div!(4,a,b,b)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?Sqrt
-for (fname, elty) in ((:vdSqrt,:Float64),
+name = :sqrt!
+for (fmkl, elty) in ((:vdSqrt,:Float64),
                       (:vsSqrt,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_sqrt!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}),
                  n, a, y)
             # vml_check_error()
@@ -54,18 +77,18 @@ for (fname, elty) in ((:vdSqrt,:Float64),
         end
     end
 end
-begin
-    T = Float32
-    a = T[1,0,2,2]
-    mkl_sqrt!(4,a,a)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?InvSqrt
-for (fname, elty) in ((:vdInvSqrt,:Float64),
+name = :invsqrt!
+for (fmkl, elty) in ((:vdInvSqrt,:Float64),
                       (:vsInvSqrt,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_invsqrt!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}),
                  n, a, y)
             # vml_check_error()
@@ -73,18 +96,18 @@ for (fname, elty) in ((:vdInvSqrt,:Float64),
         end
     end
 end
-begin
-    T = Float64
-    a = T[1,0,2,2]
-    mkl_invsqrt!(4,a,a)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?Cbrt
-for (fname, elty) in ((:vdCbrt,:Float64),
+name = :cbrt!
+for (fmkl, elty) in ((:vdCbrt,:Float64),
                       (:vsCbrt,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_cbrt!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}),
                  n, a, y)
             # vml_check_error()
@@ -92,18 +115,18 @@ for (fname, elty) in ((:vdCbrt,:Float64),
         end
     end
 end
-begin
-    T = Float64
-    a = T[1,0,8,27]
-    mkl_cbrt!(4,a,a)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?InvCbrt
-for (fname, elty) in ((:vdInvCbrt,:Float64),
+name = :invcbrt!
+for (fmkl, elty) in ((:vdInvCbrt,:Float64),
                       (:vsInvCbrt,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_invcbrt!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}),
                  n, a, y)
             # vml_check_error()
@@ -111,18 +134,18 @@ for (fname, elty) in ((:vdInvCbrt,:Float64),
         end
     end
 end
-begin
-    T = Float32
-    a = T[1,0,8,27]
-    mkl_invcbrt!(4,a,a)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?Pow
-for (fname, elty) in ((:vdPow,:Float64),
+name = :pow!
+for (fmkl, elty) in ((:vdPow,:Float64),
                       (:vsPow,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_pow!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}, Ptr{$elty}),
                  n, a, b, y)
             # vml_check_error()
@@ -130,19 +153,18 @@ for (fname, elty) in ((:vdPow,:Float64),
         end
     end
 end
-begin
-    T = Float32
-    a = T[1,2,3,4]
-    b = T[1,2,3,2]
-    mkl_pow!(4,a,b,b)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?Powx
-for (fname, elty) in ((:vdPowx,:Float64),
+name = :powx!
+for (fmkl, elty) in ((:vdPowx,:Float64),
                       (:vsPowx,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_powx!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::$elty, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::$elty, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, $elty, Ptr{$elty}),
                  n, a, b, y)
             # vml_check_error()
@@ -150,19 +172,18 @@ for (fname, elty) in ((:vdPowx,:Float64),
         end
     end
 end
-begin
-    T = Float64
-    a = T[1,2,3,4]
-    b = convert(T,2)
-    mkl_powx!(4,a,b,a)
-end
+# ------------------------------------------------------------------------------
+
 
 ## ?Hypot
-for (fname, elty) in ((:vdHypot,:Float64),
+name = :hypot!
+for (fmkl, elty) in ((:vdHypot,:Float64),
                       (:vsHypot,:Float32))
+
+    fname = symbol(string(prefix)*string(name))
     @eval begin
-        function mkl_hypot!(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
-            ccall(($(string(fname)), libmkl), Void,
+        function $fname(n::Integer, a::Union{Ptr{$elty},DenseArray{$elty}}, b::Union{Ptr{$elty},DenseArray{$elty}}, y::Union{Ptr{$elty},DenseArray{$elty}})
+            ccall(($(string(fmkl)), libmkl), Void,
                 (Int, Ptr{$elty}, Ptr{$elty}, Ptr{$elty}),
                  n, a, b, y)
             # vml_check_error()
@@ -170,9 +191,4 @@ for (fname, elty) in ((:vdHypot,:Float64),
         end
     end
 end
-begin
-    T = Float32
-    a = T[1,5,2,1]
-    b = T[3,5,6,1]
-    mkl_hypot!(4,a,b,b)
-end
+# ------------------------------------------------------------------------------

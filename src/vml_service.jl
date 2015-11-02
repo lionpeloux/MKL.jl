@@ -1,6 +1,21 @@
 # ------------------------------------------------------------------------------
 #                              VML SERVICE FUNCTION
 # ------------------------------------------------------------------------------
+
+println("MKL : VML SERVICE")
+for fname in (  :vml_get_mode, :vml_set_mode,
+                :vml_get_accuracy, :vml_set_accuracy,
+                :vml_check_error)
+
+                println("export : ", string(fname))
+                @eval begin
+                    export $fname
+                end
+end
+
+# ------------------------------------------------------------------------------
+
+
 immutable VMLAccuracy
     mode::UInt
 end
