@@ -24,20 +24,16 @@ end
 `JIT` is triggered and results are stored in the return arrays at item `1`.
 `gcdisable` allows to disable the GC during evaluations (defaults to `true`).
 """
-function ibench(ex::Expr, timing=0.0001, gcdisable=true ; α=0.05, print_eval=false, print_stats=false, print_detail=false)
+function ibench(f, args, timing=0.0001, gcdisable=true ; α=0.05, print_eval=false, print_stats=false, print_detail=false)
 
     # HOW-TO : construct an expression for unary and multiary functions
-    # s1 = :f
-    # s2 = (:a,:b)
-    # s3 = (:c,)
-    # Expr(:call,s1,s2...)
-    # Expr(:call,s1,s3...)
+    # f is a function (not a symbol)
+    # args is a tuple of arguments (a,) ; (a,b) ; (a,b,c) etc
 
     # TRIGGER JIT : first compilation will be ignored
     # res = @timed f(arg...)
     # res = @timed eval(Expr(:call,f,eval(arg)...)) # everything is pass as symbol
-
-    res = @timed eval(ex)
+    res = @timed f(args...)
     nrun = max(2,convert(Int64,div(timing,res[2]))) # at least one run
 
     # allocate results arrays
@@ -54,31 +50,16 @@ function ibench(ex::Expr, timing=0.0001, gcdisable=true ; α=0.05, print_eval=fa
     gc()
     for i=1:nrun
         gcdisable ? gc_enable(false) : ""
-        res = @timed eval(ex)
+        res = @timed f(args...)
         gcdisable ? gc_enable(true) : ""
         res_cpu[i+1] = res[2]
         res_gc[i+1] = res[4]
         res_alloc[i+1] = res[3]
     end
 
-    idisplay(ex, timing, res_cpu, res_gc, res_alloc ; α=α, print_eval=print_eval, print_stats=print_stats, print_detail=print_detail)
+    idisplay(f, args, timing, res_cpu, res_gc, res_alloc ; α=α, print_eval=print_eval, print_stats=print_stats, print_detail=print_detail)
     return res_cpu, res_gc, res_alloc
 end
-
-# TUTORIAL
-# a = [0.0,1.0]
-# b = [1.0,2.0]
-#
-# f = :+
-# arg = (:a,:b)
-# e = Expr(:call,f,arg...)
-# ibench(e, 0.01, true ; print_stats=true, print_detail=false, print_eval=true)
-#
-# f = :sin
-# arg = (:a,)
-# e = Expr(:call,f,arg...)
-# ibench(e, 0.01, true ; print_stats=true, print_detail=false, print_eval=true)
-
 
 """
 `ìdisplay` prints the results of an individual bench `ìbench` performed on a
@@ -86,7 +67,7 @@ function `f` with the given input arguments `arg`.
 `detail` printing defaults to `false`.
 `res` prints a sample evaluation (for checking) is `true` ; defaults to `false`
 """
-function idisplay(ex::Expr, timing, res_cpu::Vector{Float64}, res_gc::Vector{Float64}, res_alloc::Vector{Int64} ; α=0.05, print_eval=false, print_stats=true, print_detail=false)
+function idisplay(f, args, timing, res_cpu::Vector{Float64}, res_gc::Vector{Float64}, res_alloc::Vector{Int64} ; α=0.05, print_eval=false, print_stats=true, print_detail=false)
 
     nrun = length(res_cpu)-1
 
@@ -104,13 +85,13 @@ function idisplay(ex::Expr, timing, res_cpu::Vector{Float64}, res_gc::Vector{Flo
     # SUMMARY
     println("")
     printfmtln(fe_sep1,"")
-    println("Running $ex for about $timing s")
+    println("Running $f for about $timing s")
     println("Evaluations : $nrun")
     println("CPU time : ",sum(res_cpu),"s")
     # PRINT EVAL
     if print_eval
-        println(ex, " = ")
-        println(eval(ex))
+        println(string(f)," = ")
+        println(f(args...))
     end
 
     # HEADER
@@ -142,6 +123,7 @@ function idisplay(ex::Expr, timing, res_cpu::Vector{Float64}, res_gc::Vector{Flo
     end
     return
 end
+
 
 """
 """
