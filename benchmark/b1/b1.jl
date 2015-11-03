@@ -11,7 +11,7 @@ Julia, OpenBLAS and MKL that runs on a n-dim vector.
 The comparison is also made between Float32 / Float64.
 """
 # BENCH PARAMETERS
-timing = 2
+timing = 1
 α = 0.01
 path = Pkg.dir("MKL") * "/benchmark/b1/"
 
@@ -27,7 +27,7 @@ vj_invsqrt{T<:Number}(a::Vector{T}) = 1 ./ sqrt(a)
 begin
     df = DataFrame(Generic = ASCIIString[], Implementation = ASCIIString[], Type = ASCIIString[], Method = Any[], CPU_mean = Number[], CPU_conf = Number[])
 
-    n = 10
+    n = 1000*1000
 
     λ32 = convert(Float32,pi) # keep it to 1.0 otherwise scal is going inf
     a32 = rand(Float32,n)
@@ -75,7 +75,7 @@ begin
         ("X/Y",     "MKL"   ,    t,  mkl_div!   ,   (n,a,b,y)   ),
 
         ("1/X",     "VJulia",    t,  ./         ,   (convert(t,1),b)),
-        ("1/X",     "MKL"   ,    t,  mkl_div!   ,   (n,a,b,y)   ),
+        ("1/X",     "MKL"   ,    t,  mkl_inv!   ,   (n,a,y)   ),
 
         ("|X|",     "VJulia",    t,  abs        ,   (a,)        ),
         ("|X|",     "MKL"   ,    t,  mkl_abs!   ,   (n,a,y)     ),
