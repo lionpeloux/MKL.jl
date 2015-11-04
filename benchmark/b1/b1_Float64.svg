@@ -1,0 +1,434 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     xmlns:gadfly="http://www.gadflyjl.org/ns"
+     version="1.2"
+     width="250mm" height="120mm" viewBox="0 0 250 120"
+     stroke="none"
+     fill="#000000"
+     stroke-width="0.3"
+     font-size="3.88"
+>
+<g class="plotroot yscalable" id="fig-851e8f705f784aff9119bb2fc7874c54-element-1">
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-2">
+    <text x="115.54" y="108.39" text-anchor="middle" dy="0.6em">Implementation <tspan style="dominant-baseline:inherit" font-style="italic"><tspan style="dominant-baseline:inherit" font-weight="bold">by</tspan></tspan> Generic</text>
+  </g>
+  <g class="guide colorkey" id="fig-851e8f705f784aff9119bb2fc7874c54-element-3">
+    <g fill="#4C404B" font-size="2.82" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" id="fig-851e8f705f784aff9119bb2fc7874c54-element-4">
+      <text x="222.29" y="57.19" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-5" class="color_BLAS">BLAS</text>
+      <text x="222.29" y="60.81" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-6" class="color_MKL">MKL</text>
+      <text x="222.29" y="64.44" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-7" class="color_VJulia">VJulia</text>
+    </g>
+    <g stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-8">
+      <rect x="219.47" y="56.28" width="1.81" height="1.81" id="fig-851e8f705f784aff9119bb2fc7874c54-element-9" fill="#00BFFF" class="color_BLAS"/>
+      <rect x="219.47" y="59.91" width="1.81" height="1.81" id="fig-851e8f705f784aff9119bb2fc7874c54-element-10" fill="#D4CA3A" class="color_MKL"/>
+      <rect x="219.47" y="63.53" width="1.81" height="1.81" id="fig-851e8f705f784aff9119bb2fc7874c54-element-11" fill="#FF5EA0" class="color_VJulia"/>
+    </g>
+    <g fill="#362A35" font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-12">
+      <text x="219.47" y="53.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-13">Implementation</text>
+    </g>
+  </g>
+  <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-15)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-14">
+    <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-16">
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-17">
+        <text x="209.36" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 209.36, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-18">1/sqrt(X)</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-19">
+        <text x="191.13" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 191.13, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-20">sqrt(X)</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-21">
+        <text x="172.9" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 172.9, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-22">|X|</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-23">
+        <text x="154.67" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 154.67, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-24">1/X</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-25">
+        <text x="136.44" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 136.44, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-26">X/Y</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-27">
+        <text x="118.22" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 118.22, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-28">X^2</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-29">
+        <text x="99.99" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 99.99, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-30">aX+Y</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-31">
+        <text x="81.76" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 81.76, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-32">X-Y</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-33">
+        <text x="63.53" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 63.53, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-34">X+Y</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-35">
+        <text x="45.3" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 45.3, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-36">aX</text>
+      </g>
+      <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-37">
+        <text x="26.07" y="87.96" text-anchor="end" dy="0.35em" transform="rotate(-90, 26.07, 87.96)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-38">X.Y</text>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-40)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-39">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-41">
+          <rect x="202.24" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-42"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-43">
+          <path fill="none" d="M202.24,82.96 L 216.47 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-44"/>
+          <path fill="none" d="M202.24,66.37 L 216.47 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-45"/>
+          <path fill="none" d="M202.24,49.79 L 216.47 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-46"/>
+          <path fill="none" d="M202.24,33.2 L 216.47 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-47"/>
+          <path fill="none" d="M202.24,16.61 L 216.47 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-48"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-49">
+          <path fill="none" d="M206.99,14.61 L 206.99 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-50"/>
+          <path fill="none" d="M211.73,14.61 L 211.73 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-51"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-52">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-53">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-54">
+              <rect x="212.23" y="58.65" width="3.74" height="24.31" id="fig-851e8f705f784aff9119bb2fc7874c54-element-55" fill="#FF5EA0"/>
+              <rect x="212.23" y="7.14" width="3.74" height="51.51" id="fig-851e8f705f784aff9119bb2fc7874c54-element-56" fill="#FF5EA0"/>
+              <rect x="207.49" y="70.25" width="3.74" height="12.71" id="fig-851e8f705f784aff9119bb2fc7874c54-element-57" fill="#D4CA3A"/>
+              <rect x="207.49" y="65.64" width="3.74" height="4.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-58" fill="#D4CA3A"/>
+              <rect x="202.74" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-59" fill="#00BFFF"/>
+              <rect x="202.74" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-60" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-62)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-61">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-63">
+          <rect x="184.01" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-64"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-65">
+          <path fill="none" d="M184.01,82.96 L 198.24 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-66"/>
+          <path fill="none" d="M184.01,66.37 L 198.24 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-67"/>
+          <path fill="none" d="M184.01,49.79 L 198.24 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-68"/>
+          <path fill="none" d="M184.01,33.2 L 198.24 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-69"/>
+          <path fill="none" d="M184.01,16.61 L 198.24 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-70"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-71">
+          <path fill="none" d="M188.76,14.61 L 188.76 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-72"/>
+          <path fill="none" d="M193.5,14.61 L 193.5 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-73"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-74">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-75">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-76">
+              <rect x="194" y="70.25" width="3.74" height="12.71" id="fig-851e8f705f784aff9119bb2fc7874c54-element-77" fill="#FF5EA0"/>
+              <rect x="194" y="45.86" width="3.74" height="24.39" id="fig-851e8f705f784aff9119bb2fc7874c54-element-78" fill="#FF5EA0"/>
+              <rect x="189.26" y="73.18" width="3.74" height="9.78" id="fig-851e8f705f784aff9119bb2fc7874c54-element-79" fill="#D4CA3A"/>
+              <rect x="189.26" y="67.8" width="3.74" height="5.39" id="fig-851e8f705f784aff9119bb2fc7874c54-element-80" fill="#D4CA3A"/>
+              <rect x="184.51" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-81" fill="#00BFFF"/>
+              <rect x="184.51" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-82" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-84)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-83">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-85">
+          <rect x="165.79" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-86"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-87">
+          <path fill="none" d="M165.79,82.96 L 180.01 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-88"/>
+          <path fill="none" d="M165.79,66.37 L 180.01 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-89"/>
+          <path fill="none" d="M165.79,49.79 L 180.01 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-90"/>
+          <path fill="none" d="M165.79,33.2 L 180.01 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-91"/>
+          <path fill="none" d="M165.79,16.61 L 180.01 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-92"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-93">
+          <path fill="none" d="M170.53,14.61 L 170.53 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-94"/>
+          <path fill="none" d="M175.27,14.61 L 175.27 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-95"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-96">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-97">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-98">
+              <rect x="175.77" y="77.64" width="3.74" height="5.32" id="fig-851e8f705f784aff9119bb2fc7874c54-element-99" fill="#FF5EA0"/>
+              <rect x="175.77" y="69.74" width="3.74" height="7.91" id="fig-851e8f705f784aff9119bb2fc7874c54-element-100" fill="#FF5EA0"/>
+              <rect x="171.03" y="80.8" width="3.74" height="2.16" id="fig-851e8f705f784aff9119bb2fc7874c54-element-101" fill="#D4CA3A"/>
+              <rect x="171.03" y="76.44" width="3.74" height="4.36" id="fig-851e8f705f784aff9119bb2fc7874c54-element-102" fill="#D4CA3A"/>
+              <rect x="166.29" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-103" fill="#00BFFF"/>
+              <rect x="166.29" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-104" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-106)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-105">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-107">
+          <rect x="147.56" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-108"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-109">
+          <path fill="none" d="M147.56,82.96 L 161.79 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-110"/>
+          <path fill="none" d="M147.56,66.37 L 161.79 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-111"/>
+          <path fill="none" d="M147.56,49.79 L 161.79 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-112"/>
+          <path fill="none" d="M147.56,33.2 L 161.79 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-113"/>
+          <path fill="none" d="M147.56,16.61 L 161.79 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-114"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-115">
+          <path fill="none" d="M152.3,14.61 L 152.3 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-116"/>
+          <path fill="none" d="M157.04,14.61 L 157.04 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-117"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-118">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-119">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-120">
+              <rect x="157.54" y="70.57" width="3.74" height="12.39" id="fig-851e8f705f784aff9119bb2fc7874c54-element-121" fill="#FF5EA0"/>
+              <rect x="157.54" y="44.97" width="3.74" height="25.6" id="fig-851e8f705f784aff9119bb2fc7874c54-element-122" fill="#FF5EA0"/>
+              <rect x="152.8" y="80.67" width="3.74" height="2.29" id="fig-851e8f705f784aff9119bb2fc7874c54-element-123" fill="#D4CA3A"/>
+              <rect x="152.8" y="74.92" width="3.74" height="5.76" id="fig-851e8f705f784aff9119bb2fc7874c54-element-124" fill="#D4CA3A"/>
+              <rect x="148.06" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-125" fill="#00BFFF"/>
+              <rect x="148.06" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-126" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-128)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-127">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-129">
+          <rect x="129.33" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-130"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-131">
+          <path fill="none" d="M129.33,82.96 L 143.56 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-132"/>
+          <path fill="none" d="M129.33,66.37 L 143.56 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-133"/>
+          <path fill="none" d="M129.33,49.79 L 143.56 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-134"/>
+          <path fill="none" d="M129.33,33.2 L 143.56 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-135"/>
+          <path fill="none" d="M129.33,16.61 L 143.56 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-136"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-137">
+          <path fill="none" d="M134.07,14.61 L 134.07 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-138"/>
+          <path fill="none" d="M138.81,14.61 L 138.81 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-139"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-140">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-141">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-142">
+              <rect x="139.31" y="71.02" width="3.74" height="11.94" id="fig-851e8f705f784aff9119bb2fc7874c54-element-143" fill="#FF5EA0"/>
+              <rect x="139.31" y="45.37" width="3.74" height="25.65" id="fig-851e8f705f784aff9119bb2fc7874c54-element-144" fill="#FF5EA0"/>
+              <rect x="134.57" y="79.96" width="3.74" height="3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-145" fill="#D4CA3A"/>
+              <rect x="134.57" y="73.78" width="3.74" height="6.18" id="fig-851e8f705f784aff9119bb2fc7874c54-element-146" fill="#D4CA3A"/>
+              <rect x="129.83" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-147" fill="#00BFFF"/>
+              <rect x="129.83" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-148" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-150)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-149">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-151">
+          <rect x="111.1" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-152"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-153">
+          <path fill="none" d="M111.1,82.96 L 125.33 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-154"/>
+          <path fill="none" d="M111.1,66.37 L 125.33 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-155"/>
+          <path fill="none" d="M111.1,49.79 L 125.33 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-156"/>
+          <path fill="none" d="M111.1,33.2 L 125.33 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-157"/>
+          <path fill="none" d="M111.1,16.61 L 125.33 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-158"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-159">
+          <path fill="none" d="M115.84,14.61 L 115.84 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-160"/>
+          <path fill="none" d="M120.59,14.61 L 120.59 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-161"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-162">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-163">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-164">
+              <rect x="121.09" y="53.1" width="3.74" height="29.86" id="fig-851e8f705f784aff9119bb2fc7874c54-element-165" fill="#FF5EA0"/>
+              <rect x="121.09" y="17.94" width="3.74" height="35.17" id="fig-851e8f705f784aff9119bb2fc7874c54-element-166" fill="#FF5EA0"/>
+              <rect x="116.34" y="80.64" width="3.74" height="2.32" id="fig-851e8f705f784aff9119bb2fc7874c54-element-167" fill="#D4CA3A"/>
+              <rect x="116.34" y="76.32" width="3.74" height="4.32" id="fig-851e8f705f784aff9119bb2fc7874c54-element-168" fill="#D4CA3A"/>
+              <rect x="111.6" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-169" fill="#00BFFF"/>
+              <rect x="111.6" y="82.96" width="3.74" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-170" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-172)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-171">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-173">
+          <rect x="92.87" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-174"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-175">
+          <path fill="none" d="M92.87,82.96 L 107.1 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-176"/>
+          <path fill="none" d="M92.87,66.37 L 107.1 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-177"/>
+          <path fill="none" d="M92.87,49.79 L 107.1 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-178"/>
+          <path fill="none" d="M92.87,33.2 L 107.1 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-179"/>
+          <path fill="none" d="M92.87,16.61 L 107.1 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-180"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-181">
+          <path fill="none" d="M97.62,14.61 L 97.62 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-182"/>
+          <path fill="none" d="M102.36,14.61 L 102.36 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-183"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-184">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-185">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-186">
+              <rect x="102.86" y="74.84" width="3.74" height="8.12" id="fig-851e8f705f784aff9119bb2fc7874c54-element-187" fill="#FF5EA0"/>
+              <rect x="102.86" y="58.2" width="3.74" height="16.63" id="fig-851e8f705f784aff9119bb2fc7874c54-element-188" fill="#FF5EA0"/>
+              <rect x="98.12" y="80.7" width="3.74" height="2.26" id="fig-851e8f705f784aff9119bb2fc7874c54-element-189" fill="#D4CA3A"/>
+              <rect x="98.12" y="76.29" width="3.74" height="4.41" id="fig-851e8f705f784aff9119bb2fc7874c54-element-190" fill="#D4CA3A"/>
+              <rect x="93.37" y="80.72" width="3.74" height="2.24" id="fig-851e8f705f784aff9119bb2fc7874c54-element-191" fill="#00BFFF"/>
+              <rect x="93.37" y="76.24" width="3.74" height="4.49" id="fig-851e8f705f784aff9119bb2fc7874c54-element-192" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-194)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-193">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-195">
+          <rect x="74.64" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-196"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-197">
+          <path fill="none" d="M74.64,82.96 L 88.87 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-198"/>
+          <path fill="none" d="M74.64,66.37 L 88.87 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-199"/>
+          <path fill="none" d="M74.64,49.79 L 88.87 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-200"/>
+          <path fill="none" d="M74.64,33.2 L 88.87 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-201"/>
+          <path fill="none" d="M74.64,16.61 L 88.87 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-202"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-203">
+          <path fill="none" d="M79.39,14.61 L 79.39 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-204"/>
+          <path fill="none" d="M84.13,14.61 L 84.13 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-205"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-206">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-207">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-208">
+              <rect x="84.63" y="78.55" width="3.74" height="4.41" id="fig-851e8f705f784aff9119bb2fc7874c54-element-209" fill="#FF5EA0"/>
+              <rect x="84.63" y="69.81" width="3.74" height="8.73" id="fig-851e8f705f784aff9119bb2fc7874c54-element-210" fill="#FF5EA0"/>
+              <rect x="79.89" y="79.93" width="3.74" height="3.03" id="fig-851e8f705f784aff9119bb2fc7874c54-element-211" fill="#D4CA3A"/>
+              <rect x="79.89" y="74.06" width="3.74" height="5.87" id="fig-851e8f705f784aff9119bb2fc7874c54-element-212" fill="#D4CA3A"/>
+              <rect x="75.14" y="80.79" width="3.74" height="2.17" id="fig-851e8f705f784aff9119bb2fc7874c54-element-213" fill="#00BFFF"/>
+              <rect x="75.14" y="76.39" width="3.74" height="4.4" id="fig-851e8f705f784aff9119bb2fc7874c54-element-214" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-216)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-215">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-217">
+          <rect x="56.42" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-218"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-219">
+          <path fill="none" d="M56.42,82.96 L 70.64 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-220"/>
+          <path fill="none" d="M56.42,66.37 L 70.64 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-221"/>
+          <path fill="none" d="M56.42,49.79 L 70.64 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-222"/>
+          <path fill="none" d="M56.42,33.2 L 70.64 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-223"/>
+          <path fill="none" d="M56.42,16.61 L 70.64 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-224"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-225">
+          <path fill="none" d="M61.16,14.61 L 61.16 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-226"/>
+          <path fill="none" d="M65.9,14.61 L 65.9 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-227"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-228">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-229">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-230">
+              <rect x="66.4" y="78.38" width="3.74" height="4.58" id="fig-851e8f705f784aff9119bb2fc7874c54-element-231" fill="#FF5EA0"/>
+              <rect x="66.4" y="69.75" width="3.74" height="8.63" id="fig-851e8f705f784aff9119bb2fc7874c54-element-232" fill="#FF5EA0"/>
+              <rect x="61.66" y="79.79" width="3.74" height="3.17" id="fig-851e8f705f784aff9119bb2fc7874c54-element-233" fill="#D4CA3A"/>
+              <rect x="61.66" y="73.99" width="3.74" height="5.81" id="fig-851e8f705f784aff9119bb2fc7874c54-element-234" fill="#D4CA3A"/>
+              <rect x="56.92" y="80.77" width="3.74" height="2.19" id="fig-851e8f705f784aff9119bb2fc7874c54-element-235" fill="#00BFFF"/>
+              <rect x="56.92" y="76.44" width="3.74" height="4.34" id="fig-851e8f705f784aff9119bb2fc7874c54-element-236" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-238)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-237">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-239">
+          <rect x="38.19" y="14.61" width="14.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-240"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-241">
+          <path fill="none" d="M38.19,82.96 L 52.42 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-242"/>
+          <path fill="none" d="M38.19,66.37 L 52.42 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-243"/>
+          <path fill="none" d="M38.19,49.79 L 52.42 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-244"/>
+          <path fill="none" d="M38.19,33.2 L 52.42 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-245"/>
+          <path fill="none" d="M38.19,16.61 L 52.42 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-246"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-247">
+          <path fill="none" d="M42.93,14.61 L 42.93 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-248"/>
+          <path fill="none" d="M47.67,14.61 L 47.67 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-249"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-250">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-251">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-252">
+              <rect x="48.17" y="79.05" width="3.74" height="3.91" id="fig-851e8f705f784aff9119bb2fc7874c54-element-253" fill="#FF5EA0"/>
+              <rect x="48.17" y="71.17" width="3.74" height="7.88" id="fig-851e8f705f784aff9119bb2fc7874c54-element-254" fill="#FF5EA0"/>
+              <rect x="43.43" y="81.98" width="3.74" height="0.98" id="fig-851e8f705f784aff9119bb2fc7874c54-element-255" fill="#D4CA3A"/>
+              <rect x="43.43" y="78.96" width="3.74" height="3.02" id="fig-851e8f705f784aff9119bb2fc7874c54-element-256" fill="#D4CA3A"/>
+              <rect x="38.69" y="82.07" width="3.74" height="0.89" id="fig-851e8f705f784aff9119bb2fc7874c54-element-257" fill="#00BFFF"/>
+              <rect x="38.69" y="78.8" width="3.74" height="3.27" id="fig-851e8f705f784aff9119bb2fc7874c54-element-258" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g clip-path="url(#fig-851e8f705f784aff9119bb2fc7874c54-element-260)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-259">
+        <g pointer-events="visible" opacity="1" fill="#000000" fill-opacity="0.000" stroke="#000000" stroke-opacity="0.000" class="guide background" id="fig-851e8f705f784aff9119bb2fc7874c54-element-261">
+          <rect x="17.96" y="14.61" width="16.23" height="70.35" id="fig-851e8f705f784aff9119bb2fc7874c54-element-262"/>
+        </g>
+        <g class="guide ygridlines xfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-263">
+          <path fill="none" d="M17.96,82.96 L 34.19 82.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-264"/>
+          <path fill="none" d="M17.96,66.37 L 34.19 66.37" id="fig-851e8f705f784aff9119bb2fc7874c54-element-265"/>
+          <path fill="none" d="M17.96,49.79 L 34.19 49.79" id="fig-851e8f705f784aff9119bb2fc7874c54-element-266"/>
+          <path fill="none" d="M17.96,33.2 L 34.19 33.2" id="fig-851e8f705f784aff9119bb2fc7874c54-element-267"/>
+          <path fill="none" d="M17.96,16.61 L 34.19 16.61" id="fig-851e8f705f784aff9119bb2fc7874c54-element-268"/>
+        </g>
+        <g class="guide xgridlines yfixed" stroke-dasharray="0.5,0.5" stroke-width="0.2" stroke="#D0D0E0" id="fig-851e8f705f784aff9119bb2fc7874c54-element-269">
+          <path fill="none" d="M23.37,14.61 L 23.37 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-270"/>
+          <path fill="none" d="M28.78,14.61 L 28.78 84.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-271"/>
+        </g>
+        <g class="plotpanel" id="fig-851e8f705f784aff9119bb2fc7874c54-element-272">
+          <g shape-rendering="crispEdges" stroke-width="0.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-273">
+            <g stroke="#000000" stroke-opacity="0.000" class="geometry" id="fig-851e8f705f784aff9119bb2fc7874c54-element-274">
+              <rect x="29.28" y="75.85" width="4.41" height="7.11" id="fig-851e8f705f784aff9119bb2fc7874c54-element-275" fill="#FF5EA0"/>
+              <rect x="29.28" y="70.63" width="4.41" height="5.23" id="fig-851e8f705f784aff9119bb2fc7874c54-element-276" fill="#FF5EA0"/>
+              <rect x="29.28" y="58.82" width="4.41" height="11.81" id="fig-851e8f705f784aff9119bb2fc7874c54-element-277" fill="#FF5EA0"/>
+              <rect x="29.28" y="49.68" width="4.41" height="9.14" id="fig-851e8f705f784aff9119bb2fc7874c54-element-278" fill="#FF5EA0"/>
+              <rect x="23.87" y="81.51" width="4.41" height="1.45" id="fig-851e8f705f784aff9119bb2fc7874c54-element-279" fill="#D4CA3A"/>
+              <rect x="23.87" y="78.55" width="4.41" height="2.96" id="fig-851e8f705f784aff9119bb2fc7874c54-element-280" fill="#D4CA3A"/>
+              <rect x="23.87" y="75.57" width="4.41" height="2.97" id="fig-851e8f705f784aff9119bb2fc7874c54-element-281" fill="#D4CA3A"/>
+              <rect x="23.87" y="69.73" width="4.41" height="5.84" id="fig-851e8f705f784aff9119bb2fc7874c54-element-282" fill="#D4CA3A"/>
+              <rect x="18.46" y="80.54" width="4.41" height="2.42" id="fig-851e8f705f784aff9119bb2fc7874c54-element-283" fill="#00BFFF"/>
+              <rect x="18.46" y="80.54" width="4.41" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-284" fill="#00BFFF"/>
+              <rect x="18.46" y="77.24" width="4.41" height="3.3" id="fig-851e8f705f784aff9119bb2fc7874c54-element-285" fill="#00BFFF"/>
+              <rect x="18.46" y="77.24" width="4.41" height="0.01" id="fig-851e8f705f784aff9119bb2fc7874c54-element-286" fill="#00BFFF"/>
+            </g>
+          </g>
+        </g>
+      </g>
+      <g class="guide ylabels" font-size="2.82" font-family="'PT Sans Caption','Helvetica Neue','Helvetica',sans-serif" fill="#6C606B" id="fig-851e8f705f784aff9119bb2fc7874c54-element-287">
+        <text x="16.96" y="82.96" text-anchor="end" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-288">0</text>
+        <text x="16.96" y="66.37" text-anchor="end" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-289">5</text>
+        <text x="16.96" y="49.79" text-anchor="end" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-290">10</text>
+        <text x="16.96" y="33.2" text-anchor="end" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-291">15</text>
+        <text x="16.96" y="16.61" text-anchor="end" dy="0.35em" id="fig-851e8f705f784aff9119bb2fc7874c54-element-292">20</text>
+      </g>
+    </g>
+  </g>
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-293">
+    <text x="8.81" y="57" text-anchor="middle" dy="0.35em" transform="rotate(-90, 8.81, 59)" id="fig-851e8f705f784aff9119bb2fc7874c54-element-294">CPU time in ns/element</text>
+  </g>
+  <g font-size="3.88" font-family="'PT Sans','Helvetica Neue','Helvetica',sans-serif" fill="#564A55" stroke="#000000" stroke-opacity="0.000" id="fig-851e8f705f784aff9119bb2fc7874c54-element-295">
+    <text x="115.54" y="10.61" text-anchor="middle" id="fig-851e8f705f784aff9119bb2fc7874c54-element-296">CPU time on n-dim vectors (n=1e6 , Float64)</text>
+  </g>
+</g>
+<defs>
+<clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-194">
+  <path d="M74.64,14.61 L 88.87 14.61 88.87 84.96 74.64 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-128">
+  <path d="M129.33,14.61 L 143.56 14.61 143.56 84.96 129.33 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-260">
+  <path d="M17.96,14.61 L 34.19 14.61 34.19 84.96 17.96 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-15">
+  <path d="M12.61,12.61 L 218.47 12.61 218.47 105.39 12.61 105.39" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-40">
+  <path d="M202.24,14.61 L 216.47 14.61 216.47 84.96 202.24 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-106">
+  <path d="M147.56,14.61 L 161.79 14.61 161.79 84.96 147.56 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-84">
+  <path d="M165.79,14.61 L 180.01 14.61 180.01 84.96 165.79 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-172">
+  <path d="M92.87,14.61 L 107.1 14.61 107.1 84.96 92.87 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-150">
+  <path d="M111.1,14.61 L 125.33 14.61 125.33 84.96 111.1 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-238">
+  <path d="M38.19,14.61 L 52.42 14.61 52.42 84.96 38.19 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-216">
+  <path d="M56.42,14.61 L 70.64 14.61 70.64 84.96 56.42 84.96" />
+</clipPath
+><clipPath id="fig-851e8f705f784aff9119bb2fc7874c54-element-62">
+  <path d="M184.01,14.61 L 198.24 14.61 198.24 84.96 184.01 84.96" />
+</clipPath
+></defs>
+</svg>

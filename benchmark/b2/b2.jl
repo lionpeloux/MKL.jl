@@ -40,7 +40,7 @@ for n in N
     stat_cpu_mkl = bstat(res_cpu[2:end] * (1e9/n),α)
     t_mkl_32 = stat_cpu_mkl[1]
 
-    T = Float32
+    T = Float32 
     a = rand(T,n)
     y = rand(T,n)
 
