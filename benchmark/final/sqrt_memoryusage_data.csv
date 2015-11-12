@@ -1,0 +1,9 @@
+SQRT,CPU,ALLOC,GC
+Allocation,4.135,8112,0.0
+Julia vectorized,8.868,8080,0.0
+Julia broadcast,13.413,8352,0.0
+Julia broadcast!,6.888999999999999,16,0.0
+Julia map,99.949,48000,0.0
+Julia map!,92.275,48000,0.0
+VML (allocation),6.226,8080,0.0
+VML (in-place),3.705,0,0.0
